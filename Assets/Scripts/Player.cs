@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float maximumCameraAngle;
     [SerializeField] private float minimumCameraAngle;
 
+    [SerializeField] private float projectileLifetime = 2.0f;
+
     private float xRotation = 0;
     private float yRotation = 0;
 
@@ -156,6 +158,8 @@ public class Player : MonoBehaviour
             GameObject projectileInstance = Instantiate(projectilePrefab);
             projectileInstance.transform.position = cameraPivot.position;
             projectileInstance.transform.rotation = cameraPivot.rotation;
+
+            Destroy(projectileInstance, projectileLifetime);
         }
     }
 }
