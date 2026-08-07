@@ -164,7 +164,9 @@ public class Player : MonoBehaviour
             Rigidbody projectileBody = projectileInstance.GetComponent<Rigidbody>();
             if (projectileBody != null)
             {
-                Vector3 projectileDirection = projectileSpawn.forward;
+                Quaternion cameraRotation = Quaternion.AngleAxis(yRotation, Vector3.right);
+
+                Vector3 projectileDirection = cameraRotation * projectileSpawn.forward;
                 projectileBody.AddForce(projectileDirection * projectileForce, ForceMode.Impulse);
             }
             else
