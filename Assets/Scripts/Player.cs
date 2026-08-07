@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform cameraPivot;
+    [SerializeField] private Transform projectileSpawn;
 
     private CharacterController controller;
 
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpDecay;
+    [SerializeField] private float projectileForce;
     [SerializeField] private float cameraHorizontalSpeed;
     [SerializeField] private float cameraVerticalSpeed;
 
@@ -156,8 +158,22 @@ public class Player : MonoBehaviour
         if (shootInput)
         {
             GameObject projectileInstance = Instantiate(projectilePrefab);
-            projectileInstance.transform.position = cameraPivot.position;
-            projectileInstance.transform.rotation = cameraPivot.rotation;
+            projectileInstance.transform.position = projectileSpawn.position;
+            projectileInstance.transform.rotation = projectileSpawn.rotation;
+
+            Rigidbody projectileBody = projectileInstance.GetComponent<Rigidbody>();
+            if (projectileBody != null)
+            {
+                Vector3 projectileDirection = projectileSpawn.forward;
+                projectileBody.AddForce(projectileDirection * projectileForce, ForceMode.Impulse);
+            }
+            else
+            {
+                if(enableDebug)
+                {
+                    Debug.Log("Projectile spawned but has no rigid body!");
+                }
+            }
 
             Destroy(projectileInstance, projectileLifetime);
         }
