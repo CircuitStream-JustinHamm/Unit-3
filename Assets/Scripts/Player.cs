@@ -12,8 +12,11 @@ public class Player : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform cameraPivot;
     [SerializeField] private Transform projectileSpawn;
+    [SerializeField] private Transform groundChecker;
+    [SerializeField] private Collider rigidbodyCollider;
 
     private CharacterController controller;
+    new private Rigidbody rigidbody;
 
     [Header("Input Variables")]
     // Axis names
@@ -35,6 +38,7 @@ public class Player : MonoBehaviour
     private float mouseVerticalInput;
 
     [Header("Configuration")]
+    [SerializeField] private bool usingCharacterController = false;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpDecay;
@@ -49,10 +53,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float projectileLifetime = 2.0f;
     [SerializeField] private float rocketLifetime = 2.0f;
 
+    [SerializeField] private float groundedDistance = 0.07f;
+
     private float xRotation = 0;
     private float yRotation = 0;
 
     private float jumpModifier;
+
+    private bool wasUsingCharacterController = false;
 
 
     private void Awake()
@@ -63,17 +71,20 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        wasUsingCharacterController = !usingCharacterController;
         GetReferences();
     }
 
     void GetReferences()
     {
+        rigidbody = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        ToggleCharacterController();
         GetPlayerInput();
         UpdateRotation();
         MovePlayer();
@@ -82,6 +93,30 @@ public class Player : MonoBehaviour
         TurnCamera();
         ShootProjectile();
         ShootRocket();
+    }
+
+    void ToggleCharacterController()
+    {
+        // If we just toggled the character controller...
+        if(usingCharacterController != wasUsingCharacterController)
+        {
+            // And we just turned it on...
+            if(usingCharacterController)
+            {
+                rigidbody.isKinematic = true;
+                controller.enabled = true;
+                rigidbodyCollider.enabled = false;
+            }
+            // Or, if we just turned it off...
+            else
+            {
+                rigidbody.isKinematic = false;
+                controller.enabled = false;
+                rigidbodyCollider.enabled = true;
+            }
+
+            wasUsingCharacterController = usingCharacterController;
+        }
     }
 
     void GetPlayerInput()
@@ -122,15 +157,22 @@ public class Player : MonoBehaviour
         // Add movement speed to movement vector
         movementVector *= movementSpeed;
 
-        // Add gravity to movement vector
-        movementVector += Physics.gravity;
+        if (usingCharacterController)
+        {
+            // Add gravity to movement vector
+            movementVector += Physics.gravity;
 
-        // Add jump to movement
-        movementVector += Vector3.up * jumpModifier;
+            // Add jump to movement
+            movementVector += Vector3.up * jumpModifier;
 
-        controller.Move(movementVector * Time.deltaTime);
+            controller.Move(movementVector * Time.deltaTime);
+        }
+        else
+        {
+            rigidbody.AddForce(movementVector * Time.deltaTime, ForceMode.VelocityChange);
+        }
 
-        if(enableDebug)
+        if (enableDebug)
         {
             Debug.Log($"Movement Vector: {movementVector}");
         }
@@ -138,22 +180,46 @@ public class Player : MonoBehaviour
 
     void DoJump()
     {
-        jumpModifier = jumpModifier - jumpDecay * Time.deltaTime;
-        if(jumpModifier < 0)
+        if (usingCharacterController)
         {
-            jumpModifier = 0;
+            jumpModifier = jumpModifier - jumpDecay * Time.deltaTime;
+            if (jumpModifier < 0)
+            {
+                jumpModifier = 0;
+            }
+
+            if (jumpInput && controller.isGrounded)
+            {
+                jumpModifier = jumpForce;
+            }
+        }
+        else
+        {
+            if(jumpInput && IsGrounded())
+            {
+                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
         }
 
-        if (jumpInput && controller.isGrounded)
-        {
-            jumpModifier = jumpForce;
-        }
 
-        if(enableDebug)
+        if (enableDebug)
         {
             Debug.Log($"Jump Modifier: {jumpModifier}");
-            Debug.Log($"Is Grounded: {controller.isGrounded}");
+            if (usingCharacterController)
+            {
+                Debug.Log($"Is Grounded: {controller.isGrounded}");
+            }
+            else
+            {
+                Debug.Log($"Is Grounded: {IsGrounded()}");
+            }
         }
+    }
+
+    bool IsGrounded()
+    {
+        int layer = LayerMask.GetMask("Ground");
+        return Physics.Raycast(groundChecker.position, Vector3.down, groundedDistance, layer);
     }
 
     void TurnPlayer()
