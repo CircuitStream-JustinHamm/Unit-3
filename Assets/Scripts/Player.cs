@@ -55,6 +55,11 @@ public class Player : MonoBehaviour
     private float jumpModifier;
 
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -209,7 +214,7 @@ public class Player : MonoBehaviour
             {
                 if (enableDebug)
                 {
-                    Debug.Log("Projectile spawned but has no rigid body!");
+                    Debug.Log("Rocket spawned but has no rigid body!");
                 }
             }
 
