@@ -244,17 +244,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   enableDebug: 1
   projectilePrefab: {fileID: 719936895504096, guid: d1b80271ec0e8964c952a0f39c4d826d, type: 3}
+  rocketPrefab: {fileID: 719936895504096, guid: 2def30af39d4cda478e30ea0dc995a32, type: 3}
   cameraPivot: {fileID: 667457459161054368}
   projectileSpawn: {fileID: 7390360703163215831}
   movementSpeed: 5
   jumpForce: 13
   jumpDecay: 8
   projectileForce: 12
+  rocketForce: 0
   cameraHorizontalSpeed: 160
   cameraVerticalSpeed: -160
   maximumCameraAngle: 75
   minimumCameraAngle: -60
   projectileLifetime: 2
+  rocketLifetime: 2
 --- !u!1 &4676928881585158145
 GameObject:
   m_ObjectHideFlags: 0

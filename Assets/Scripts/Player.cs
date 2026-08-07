@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject rocketPrefab;
 
     [Header("References")]
     [SerializeField] private Transform cameraPivot;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     private string verticalAxis = "Vertical";
     private string jumpButton = "Jump";
     private string shootButton = "Fire1";
+    private string rocketButton = "Fire2";
     private string mouseHorizontalAxis = "Mouse X";
     private string mouseVerticalAxis = "Mouse Y";
 
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
     private float verticalInput;
     private bool jumpInput;
     private bool shootInput;
+    private bool rocketInput;
     private float mouseHorizontalInput;
     private float mouseVerticalInput;
 
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpDecay;
     [SerializeField] private float projectileForce;
+    [SerializeField] private float rocketForce;
     [SerializeField] private float cameraHorizontalSpeed;
     [SerializeField] private float cameraVerticalSpeed;
 
@@ -43,6 +47,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float minimumCameraAngle;
 
     [SerializeField] private float projectileLifetime = 2.0f;
+    [SerializeField] private float rocketLifetime = 2.0f;
 
     private float xRotation = 0;
     private float yRotation = 0;
@@ -71,6 +76,7 @@ public class Player : MonoBehaviour
         TurnPlayer();
         TurnCamera();
         ShootProjectile();
+        ShootRocket();
     }
 
     void GetPlayerInput()
@@ -79,6 +85,7 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxis(verticalAxis);
         jumpInput = Input.GetButtonDown(jumpButton);
         shootInput = Input.GetButtonDown(shootButton);
+        rocketInput = Input.GetButtonDown(rocketButton);
         mouseHorizontalInput = Input.GetAxis(mouseHorizontalAxis);
         mouseVerticalInput = Input.GetAxis(mouseVerticalAxis);
 
@@ -88,6 +95,7 @@ public class Player : MonoBehaviour
             Debug.Log($"Vertical Input: {verticalInput}");
             Debug.Log($"Jump Input: {jumpInput}");
             Debug.Log($"Shoot Input: {shootInput}");
+            Debug.Log($"Rocket Input: {rocketInput}");
             Debug.Log($"Mouse Horizontal Input: {mouseHorizontalInput}");
             Debug.Log($"Mouse Vertical Input: {mouseVerticalInput}");
         }
@@ -172,6 +180,34 @@ public class Player : MonoBehaviour
             else
             {
                 if(enableDebug)
+                {
+                    Debug.Log("Projectile spawned but has no rigid body!");
+                }
+            }
+
+            Destroy(projectileInstance, projectileLifetime);
+        }
+    }
+
+    void ShootRocket()
+    {
+        if (rocketInput)
+        {
+            GameObject projectileInstance = Instantiate(rocketPrefab);
+            projectileInstance.transform.position = projectileSpawn.position;
+            projectileInstance.transform.rotation = projectileSpawn.rotation;
+
+            Rigidbody projectileBody = projectileInstance.GetComponent<Rigidbody>();
+            if (projectileBody != null)
+            {
+                Quaternion cameraRotation = Quaternion.AngleAxis(yRotation, Vector3.right);
+
+                Vector3 projectileDirection = cameraRotation * projectileSpawn.forward;
+                projectileBody.AddForce(projectileDirection * projectileForce, ForceMode.Impulse);
+            }
+            else
+            {
+                if (enableDebug)
                 {
                     Debug.Log("Projectile spawned but has no rigid body!");
                 }
