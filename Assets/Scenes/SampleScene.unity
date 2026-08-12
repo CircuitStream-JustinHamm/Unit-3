@@ -295,6 +295,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1695780944 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2394978876102528609, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+  m_PrefabInstance: {fileID: 8782517849726465197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3675230682854036750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -529,6 +534,62 @@ PrefabInstance:
     - target: {fileID: 924557381035831649, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: openDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: openColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: openColor.b
+      value: 0.9245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: openColor.g
+      value: 0.9245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: openColor.r
+      value: 0.9245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: delayColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: delayColor.b
+      value: 0.16497645
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: delayColor.g
+      value: 0.5320754
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: delayColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: doorRenderer
+      value: 
+      objectReference: {fileID: 1695780944}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: closedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: closedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: closedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: closedColor.r
+      value: 0.23018861
       objectReference: {fileID: 0}
     - target: {fileID: 3878995448411273305, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
       propertyPath: m_Name

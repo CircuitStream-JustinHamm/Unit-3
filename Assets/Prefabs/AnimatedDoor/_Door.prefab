@@ -296,6 +296,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorTrigger
   animator: {fileID: 969344611206698958}
+  doorRenderer: {fileID: 2394978876102528609}
+  closedColor: {r: 0.23018861, g: 0, b: 0, a: 1}
+  openColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+  delayColor: {r: 0, g: 0.5320754, b: 0.16497645, a: 1}
+  openDelay: 5
 --- !u!1 &7393296932405459870
 GameObject:
   m_ObjectHideFlags: 0
