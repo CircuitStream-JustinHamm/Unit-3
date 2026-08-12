@@ -11,8 +11,10 @@ public class Player : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform cameraPivot;
+    [SerializeField] new private Transform camera;
     [SerializeField] private Transform projectileSpawn;
     [SerializeField] private Transform groundChecker;
+    [SerializeField] private Transform pickupPivot;
     [SerializeField] private Collider rigidbodyCollider;
 
     private CharacterController controller;
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
     private string rocketButton = "Fire2";
     private string mouseHorizontalAxis = "Mouse X";
     private string mouseVerticalAxis = "Mouse Y";
+    private string interactButton = "Interact";
 
     // Axis values
     private float horizontalInput;
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour
     private bool rocketInput;
     private float mouseHorizontalInput;
     private float mouseVerticalInput;
+    private bool interactInput;
 
     [Header("Configuration")]
     [SerializeField] private bool usingCharacterController = false;
@@ -55,12 +59,15 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float groundedDistance = 0.07f;
 
+    [SerializeField] private float interactionDistance = 1.0f;
+
     private float xRotation = 0;
     private float yRotation = 0;
 
     private float jumpModifier;
 
     private bool wasUsingCharacterController = false;
+    private ISelectable selectedObject;
 
 
     private void Awake()
@@ -93,6 +100,7 @@ public class Player : MonoBehaviour
         TurnCamera();
         ShootProjectile();
         ShootRocket();
+        Interact();
     }
 
     void ToggleCharacterController()
@@ -128,6 +136,7 @@ public class Player : MonoBehaviour
         rocketInput = Input.GetButtonDown(rocketButton);
         mouseHorizontalInput = Input.GetAxis(mouseHorizontalAxis);
         mouseVerticalInput = Input.GetAxis(mouseVerticalAxis);
+        interactInput = Input.GetButtonDown(interactButton);
 
         if(enableDebug)
         {
@@ -138,6 +147,7 @@ public class Player : MonoBehaviour
             Debug.Log($"Rocket Input: {rocketInput}");
             Debug.Log($"Mouse Horizontal Input: {mouseHorizontalInput}");
             Debug.Log($"Mouse Vertical Input: {mouseVerticalInput}");
+            Debug.Log($"Interact Input: {interactInput}");
         }
     }
 
@@ -285,6 +295,43 @@ public class Player : MonoBehaviour
             }
 
             Destroy(projectileInstance, projectileLifetime);
+        }
+    }
+
+    void Interact()
+    {
+        if(interactInput)
+        {
+            if (selectedObject == null)
+            {
+                RaycastHit hitInfo;
+                Ray interactionRay = new Ray(camera.position, camera.forward);
+                if (Physics.Raycast(interactionRay, out hitInfo, interactionDistance, LayerMask.GetMask("Selectable")))
+                {
+                    selectedObject = hitInfo.transform.GetComponent<ISelectable>();
+                    if (selectedObject != null)
+                    {
+                        selectedObject.OnInteract();
+                        if (selectedObject.ShouldPickup())
+                        {
+                            selectedObject.OnPickup();
+                            selectedObject.GetTransform().SetParent(pickupPivot);
+                            selectedObject.GetTransform().localPosition = Vector3.zero;
+                            selectedObject.GetTransform().localRotation = Quaternion.identity;
+                        }
+                        else
+                        {
+                            selectedObject = null;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                selectedObject.OnPutDown();
+                selectedObject.GetTransform().SetParent(null);
+                selectedObject = null;
+            }
         }
     }
 }
