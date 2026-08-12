@@ -295,6 +295,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1218865147 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 969344611206698958, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+  m_PrefabInstance: {fileID: 8782517849726465197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1695780944 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2394978876102528609, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+  m_PrefabInstance: {fileID: 8782517849726465197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3675230682854036750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -307,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _Props
       objectReference: {fileID: 0}
+    - target: {fileID: 4994969586319503116, guid: e53a6914a094d4b43849b8f2ee17e69d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 18da5a0484f65bf438035bc5064e9a8a, type: 2}
     - target: {fileID: 7679110064764079186, guid: e53a6914a094d4b43849b8f2ee17e69d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -347,6 +361,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9218760294490362139, guid: e53a6914a094d4b43849b8f2ee17e69d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1218865147}
+    - target: {fileID: 9218760294490362139, guid: e53a6914a094d4b43849b8f2ee17e69d, type: 3}
+      propertyPath: doorRenderer
+      value: 
+      objectReference: {fileID: 1695780944}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -530,9 +552,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3789428374777393947, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3878995448411273305, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
       propertyPath: m_Name
       value: _Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087534135938912104, guid: ef1210bb561e53344a4ca39017ecb64b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

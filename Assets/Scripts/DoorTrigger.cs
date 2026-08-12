@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
+    [SerializeField] string targetTag = "Player";
+
     [SerializeField] Animator animator;
     [SerializeField] MeshRenderer doorRenderer;
 
@@ -14,7 +16,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == targetTag)
         {
             openTimer = 0;
             doorRenderer.material.color = delayColor;
@@ -23,7 +25,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == targetTag)
         {
             if (openTimer < openDelay)
             {
@@ -39,7 +41,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == targetTag)
         {
             animator.SetBool("Open", false);
             doorRenderer.material.color = closedColor;
