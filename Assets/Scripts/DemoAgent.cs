@@ -11,4 +11,9 @@ public class DemoAgent : MonoBehaviour
     {
         agent.SetDestination(targetDestination.position);
     }
+
+    public void MoveHorizontal(float value)
+    {
+
+    }
 }
