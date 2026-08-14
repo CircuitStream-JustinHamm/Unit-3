@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 7056737571744584740}
   - component: {fileID: 7853884992560776986}
   - component: {fileID: 3955283601915635764}
+  - component: {fileID: 5055391618743502961}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -277,7 +278,7 @@ Rigidbody:
   m_GameObject: {fileID: 2955379820129998419}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 2
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -295,6 +296,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!208 &5055391618743502961
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955379820129998419}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4676928881585158145
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,6 +355,7 @@ GameObject:
   - component: {fileID: 5470017576870878859}
   - component: {fileID: 8673212318427749752}
   - component: {fileID: 2685342421222457041}
+  - component: {fileID: 5229403523400034735}
   m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Player
@@ -440,6 +458,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &5229403523400034735
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835016020596534538}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5048669151025934213
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +516,7 @@ GameObject:
   - component: {fileID: 6901672570121128207}
   - component: {fileID: 8280846992022022086}
   - component: {fileID: 4946512615200459374}
+  - component: {fileID: 6418753501880457183}
   m_Layer: 0
   m_Name: WeaponModel
   m_TagString: Untagged
@@ -562,6 +597,22 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &6418753501880457183
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600441360233267653}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7741516820187432936
 GameObject:
   m_ObjectHideFlags: 0
