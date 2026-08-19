@@ -35,7 +35,7 @@ public class PlayerInputButton
     private string buttonName;
 
     [SerializeField]
-    private UnityEvent buttonAction;
+    private UnityEvent<bool> buttonAction;
 
     private bool value;
 
@@ -50,7 +50,7 @@ public class PlayerInputButton
 
     public void FireAction()
     {
-        buttonAction?.Invoke();
+        buttonAction?.Invoke(value);
     }
 }
 

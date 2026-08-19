@@ -147,10 +147,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8398015353242611718}
   - component: {fileID: 7891870559017876711}
-  - component: {fileID: 5390428953183007373}
-  - component: {fileID: 8954270347174413979}
-  - component: {fileID: 6728596078123050752}
-  - component: {fileID: 2456680847207315761}
   - component: {fileID: 5175173051790248793}
   m_Layer: 0
   m_Name: NewPlayer
@@ -193,7 +189,7 @@ MonoBehaviour:
     axisAction:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5390428953183007373}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerRigidbodyMovement, Assembly-CSharp
           m_MethodName: SetHorizontalInput
           m_Mode: 0
@@ -205,7 +201,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 6728596078123050752}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerCharacterControllerMovement, Assembly-CSharp
           m_MethodName: SetHorizontalInput
           m_Mode: 0
@@ -221,7 +217,7 @@ MonoBehaviour:
     axisAction:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5390428953183007373}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerRigidbodyMovement, Assembly-CSharp
           m_MethodName: SetVerticalInput
           m_Mode: 0
@@ -233,7 +229,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 6728596078123050752}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerCharacterControllerMovement, Assembly-CSharp
           m_MethodName: SetVerticalInput
           m_Mode: 0
@@ -262,85 +258,6 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   inputButtons: []
---- !u!114 &5390428953183007373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3501606152944022297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd43989db10e4e345ba28a9d2b4b6e53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerRigidbodyMovement
-  movementSpeed: 30
-  forceMode: 2
---- !u!54 &8954270347174413979
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3501606152944022297}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 3
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!114 &6728596078123050752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3501606152944022297}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60441e268c2ed224b9e2f3106afff5a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacterControllerMovement
-  movementSpeed: 4
---- !u!143 &2456680847207315761
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3501606152944022297}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5175173051790248793
 MonoBehaviour:
   m_ObjectHideFlags: 0
