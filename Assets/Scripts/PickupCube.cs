@@ -1,24 +1,14 @@
 using UnityEngine;
 
-public class PickupCube : MonoBehaviour, ISelectable
+public class PickupCube : MonoBehaviour, IGrabbable
 {
     new private Rigidbody rigidbody;
     bool wasKinematic;
 
     private void Start()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-    }
+    { rigidbody = GetComponent<Rigidbody>(); }
 
-    public bool ShouldPickup()
-    {
-        return true;
-    }
-
-    public void OnInteract()
-    { }
-
-    public void OnPickup()
+    public void Grab(GrabBehaviour grabber)
     {
         if (rigidbody != null)
         {
@@ -27,7 +17,7 @@ public class PickupCube : MonoBehaviour, ISelectable
         }
     }
 
-    public void OnPutDown()
+    public void Drop(GrabBehaviour grabber)
     {
         if (rigidbody != null)
         {
@@ -36,12 +26,5 @@ public class PickupCube : MonoBehaviour, ISelectable
     }
 
     public Transform GetTransform()
-    {
-        return transform;
-    }
-
-    public string GetSelectionText()
-    {
-        return "";
-    }
+    { return transform; }
 }

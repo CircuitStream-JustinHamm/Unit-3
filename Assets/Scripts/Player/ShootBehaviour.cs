@@ -5,6 +5,7 @@ public class ShootBehaviour : MonoBehaviour
     [SerializeField] private ObjectPool projectilePool;
     [SerializeField] private float projectileVelocity;
     [SerializeField] private Transform shootPoint;
+    [SerializeField] private Transform cameraPivot;
 
     [SerializeField] private float lifetime;
 
@@ -31,7 +32,7 @@ public class ShootBehaviour : MonoBehaviour
         Rigidbody projectileBody = projectile.GetComponent<Rigidbody>();
 
         projectile.transform.position = shootPoint.position;
-        projectile.transform.rotation = shootPoint.rotation;
+        projectile.transform.rotation = cameraPivot.rotation;
 
         Vector3 force = projectile.transform.forward * projectileVelocity;
 
