@@ -20,4 +20,10 @@ public class ParticleWeaponStrategy : WeaponStrategy
     {
         particles.Stop();
     }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        // Do something to target game object
+        Debug.Log(other.name);
+    }
 }
