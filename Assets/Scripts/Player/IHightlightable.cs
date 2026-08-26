@@ -1,5 +1,5 @@
 public interface IHighlightable
 {
-    string StartHighlight(HighlightBehaviour highlighter);
-    string StopHighlight(HighlightBehaviour highlighter);
+    void StartHighlight(HighlightBehaviour highlighter);
+    void StopHighlight(HighlightBehaviour highlighter);
 }

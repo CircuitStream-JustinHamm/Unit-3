@@ -27,7 +27,9 @@ public class EnemyAttackState : EnemyState
 
     private void Attack()
     {
-        Debug.Log($"Dealt damage to {_enemy.player.name}!");
+        Health playerHealth = _enemy.player.GetComponent<Health>();
+        if (playerHealth != null)
+            playerHealth.AdjustHealth(-10 * Time.deltaTime);
     }
 
     private bool ShouldTransitionToFollow()

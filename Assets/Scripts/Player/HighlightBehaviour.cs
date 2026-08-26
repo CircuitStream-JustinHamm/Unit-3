@@ -4,10 +4,19 @@ public class HighlightBehaviour : Interactor
 {
     IHighlightable target;
 
+    protected override void Update()
+    {
+        HitObject();
+        Interact();
+    }
+
     protected override void Interact()
     {
-        IHighlightable newTarget = info.transform.GetComponent<IHighlightable>();
-        if(target != newTarget)
+        IHighlightable newTarget = null;
+        if (info.transform != null)
+            newTarget = info.transform.GetComponent<IHighlightable>();
+
+        if (target != newTarget)
         {
             if(target != null)
             {
