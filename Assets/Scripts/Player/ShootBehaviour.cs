@@ -2,49 +2,55 @@ using UnityEngine;
 
 public class ShootBehaviour : MonoBehaviour
 {
-    [SerializeField] private ObjectPool projectilePool;
-    [SerializeField] private float projectileVelocity;
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private Transform cameraPivot;
+    [SerializeField] private WeaponStrategy[] weapons;
+    [SerializeField] public Transform shootPoint;
+    [SerializeField] public Transform cameraPivot;
 
-    [SerializeField] private float lifetime;
+    private int currentWeapon;
 
-    new private Rigidbody rigidbody;
     private bool shootInput;
+    private bool nextWeaponInput;
+    private bool previousWeaponInput;
 
     private void Start()
-    { rigidbody = GetComponent<Rigidbody>(); }
+    { currentWeapon = 0; }
 
     private void Update()
     {
-        if(shootInput)
+        if(nextWeaponInput)
+        { NextWeapon(); }
+        else if (previousWeaponInput)
+        { PreviousWeapon(); }
+
+        if (shootInput)
         { Shoot(); }
     }
 
-    private void Shoot()
+    private void NextWeapon()
     {
-        PooledObject projectile = projectilePool.GetPooledObject();
-        if (projectile == null)
-            return;
-
-        projectile.gameObject.SetActive(true);
-
-        Rigidbody projectileBody = projectile.GetComponent<Rigidbody>();
-
-        projectile.transform.position = shootPoint.position;
-        projectile.transform.rotation = cameraPivot.rotation;
-
-        Vector3 force = projectile.transform.forward * projectileVelocity;
-
-        if(rigidbody != null)
-        {
-            force += rigidbody.linearVelocity;
-        }
-
-        projectileBody.AddForce(force, ForceMode.Impulse);
-        projectilePool.RecyclePooledObject(projectile, lifetime);
+        weapons[currentWeapon].OnUnequip(this);
+        currentWeapon = (currentWeapon + 1) % weapons.Length;
+        weapons[currentWeapon].OnEquip(this);
     }
+
+    private void PreviousWeapon()
+    {
+        weapons[currentWeapon].OnUnequip(this);
+        currentWeapon -= 1;
+        if (currentWeapon < 0)
+            currentWeapon = weapons.Length - 1;
+        weapons[currentWeapon].OnEquip(this);
+    }
+
+    private void Shoot()
+    { weapons[currentWeapon].Shoot(this); }
 
     public void SetShootInput(bool value)
     { shootInput = value; }
+
+    public void SetNextWeaponInput(bool value)
+    { nextWeaponInput = value; }
+
+    public void SetPreviousWeaponInput(bool value)
+    { previousWeaponInput = value; }
 }
