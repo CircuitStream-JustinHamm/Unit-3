@@ -29,7 +29,10 @@ public class Interactor : MonoBehaviour
     public bool HitObject()
     {
         Ray interactionRay = new Ray(camera.position, camera.forward);
-        return Physics.Raycast(interactionRay, out info, interactionDistance, LayerMask.GetMask("Selectable"));
+        bool result = Physics.Raycast(interactionRay, out info, interactionDistance, LayerMask.GetMask("Selectable"));
+        Vector3 target = result ? info.point : interactionRay.origin + interactionRay.direction * 5;
+        Debug.DrawLine(interactionRay.origin, target, Color.red);
+        return result;
     }
 
     public void SetInteractInput(bool value)
