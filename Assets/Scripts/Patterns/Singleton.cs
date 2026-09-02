@@ -7,9 +7,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            { _instance = new GameObject("Singleton", typeof(T)) as T; }
-
             return _instance;
         }
     }
