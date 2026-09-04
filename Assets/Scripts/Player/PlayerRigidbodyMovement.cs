@@ -11,6 +11,12 @@ public class PlayerRigidbodyMovement : PlayerMovementBehaviour
     void Start()
     { rigidbody = GetComponent<Rigidbody>(); }
 
+    protected override void Update()
+    {
+        base.Update();
+        BroadcastSpeed?.Invoke(rigidbody.linearVelocity.magnitude);
+    }
+
     protected override void ApplyMovement(Vector3 movementVector)
     { rigidbody.AddForce(movementVector * Time.deltaTime, forceMode); }
 }

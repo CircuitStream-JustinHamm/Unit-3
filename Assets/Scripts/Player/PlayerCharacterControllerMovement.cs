@@ -12,5 +12,6 @@ public class PlayerCharacterControllerMovement : PlayerMovementBehaviour
     {
         movementVector += Physics.gravity;
         controller.Move(movementVector * Time.deltaTime);
+        BroadcastSpeed?.Invoke(movementVector.magnitude);
     }
 }

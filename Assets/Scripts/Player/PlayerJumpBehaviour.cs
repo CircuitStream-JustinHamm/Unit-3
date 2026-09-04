@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class PlayerJumpBehaviour : MonoBehaviour
 {
+    public UnityEvent OnJump;
+
     [SerializeField] protected float force;
 
     private bool isGrounded;
@@ -12,7 +15,10 @@ public abstract class PlayerJumpBehaviour : MonoBehaviour
         ApplyJump();
 
         if (ShouldJump())
-        { Jump(); }
+        { 
+            Jump(); 
+            OnJump?.Invoke();
+        }
     }
 
     protected virtual void ApplyJump()
